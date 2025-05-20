@@ -93,8 +93,9 @@ class BlogController {
     }
     
     public function upload() {
-        $errors = [];
+        // Обработка POST-запроса загрузки CSV файла
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
+            $errors = [];
             $file = $_FILES['csv_file'];
             if ($file['error'] === UPLOAD_ERR_OK) {
                 // Проверка типа файла
@@ -115,17 +116,23 @@ class BlogController {
             } else {
                 $errors[] = 'Ошибка при загрузке файла: ' . $this->getFileErrorMessage($file['error']);
             }
+            
+            if (!empty($errors)) {
+                $_SESSION['errors'] = $errors;
+            } else if (isset($tempName)) {
+                $_SESSION['success'] = 'Данные успешно импортированы из CSV файла.';
+            }
+            header('Location: index.php?controller=blog&action=showUploadForm');
+            exit;
+        } else {
+            // Если не POST, перенаправляем на форму загрузки
+            header('Location: index.php?controller=blog&action=showUploadForm');
+            exit;
         }
-        
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-        } else if (isset($tempName)) {
-            $_SESSION['success'] = 'Данные успешно импортированы из CSV файла.';
-        }
-        
-        $this->view->render('blog/upload.php', 'Загрузка сообщений блога', [
-            'errors' => $errors
-        ]);
+    }
+
+    public function showUploadForm() {
+        $this->view->render('blog/upload.php', 'Загрузка сообщений блога');
     }
     
     public function edit() {
