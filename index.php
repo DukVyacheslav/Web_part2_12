@@ -36,6 +36,10 @@ switch ($controller) {
     case 'blog':
         $controller = new BlogController();
         break;
+    case 'adminblog':
+        require_once 'controllers/admin/AdminBlogController.php';
+        $controller = new AdminBlogController();
+        break;
     case 'guestbook':
         $controller = new GuestbookController();
         break;

@@ -41,6 +41,39 @@ class Blog extends Model {
         return count($this->validator->errors) == 0;
     }
 
+    public static function findById($id) {
+        try {
+            $sql = "SELECT * FROM " . static::$tablename . " WHERE id = :id LIMIT 1";
+            $stmt = static::$pdo->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($row) {
+                $obj = new static();
+                foreach ($row as $key => $value) {
+                    $obj->$key = $value;
+                }
+                return $obj;
+            }
+            return null;
+        } catch (PDOException $e) {
+            error_log("Ошибка при поиске записи блога по ID: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    public function delete() {
+        try {
+            $sql = "DELETE FROM " . static::$tablename . " WHERE id = :id";
+            $stmt = static::$pdo->prepare($sql);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Ошибка при удалении записи блога: " . $e->getMessage());
+            return false;
+        }
+    }
+
     public static function getPaginated($page = 1, $per_page = 10) {
         try {
             if (!static::$pdo) {

@@ -127,6 +127,93 @@ class BlogController {
             'errors' => $errors
         ]);
     }
+    
+    public function edit() {
+        $errors = [];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+            $post = Blog::findById($_POST['id']);
+            if (!$post) {
+                $errors[] = 'Запись не найдена.';
+            } else {
+                if ($this->model->validate($_POST)) {
+                    $post->name = $_POST['name'];
+                    $post->text = $_POST['text'];
+                    $post->data = date('Y-m-d H:i:s');
+                    
+                    // Обработка загруженного изображения
+                    if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+                        if (!in_array($_FILES['img']['type'], $this->allowedImageTypes)) {
+                            $errors[] = 'Недопустимый тип файла. Разрешены только JPEG, PNG и GIF.';
+                        } elseif ($_FILES['img']['size'] > $this->maxFileSize) {
+                            $errors[] = 'Размер файла превышает 5MB.';
+                        } else {
+                            $uploadDir = 'public/images/blog/';
+                            if (!file_exists($uploadDir)) {
+                                if (!mkdir($uploadDir, 0777, true)) {
+                                    $errors[] = 'Ошибка создания директории для загрузки.';
+                                }
+                            }
+                            
+                            if (empty($errors)) {
+                                $fileName = uniqid() . '_' . htmlspecialchars($_FILES['img']['name']);
+                                $filePath = $uploadDir . $fileName;
+                                
+                                if (move_uploaded_file($_FILES['img']['tmp_name'], $filePath)) {
+                                    $post->img = $fileName;
+                                } else {
+                                    $errors[] = 'Ошибка при загрузке изображения.';
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (empty($errors)) {
+                        if (!$post->save()) {
+                            $errors[] = 'Ошибка при сохранении записи в базу данных.';
+                        }
+                    }
+                } else {
+                    $errors[] = 'Пожалуйста, проверьте правильность заполнения всех полей.';
+                }
+            }
+        } else {
+            $errors[] = 'Неверный запрос.';
+        }
+        
+        if (!empty($errors)) {
+            $_SESSION['errors'] = $errors;
+            header('Location: index.php?controller=blog&action=editor&status=error');
+        } else {
+            $_SESSION['success'] = 'Запись успешно обновлена.';
+            header('Location: index.php?controller=blog&action=editor&status=success');
+        }
+        exit;
+    }
+    
+    public function delete() {
+        $errors = [];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+            $post = Blog::findById($_POST['id']);
+            if (!$post) {
+                $errors[] = 'Запись не найдена.';
+            } else {
+                if (!$post->delete()) {
+                    $errors[] = 'Ошибка при удалении записи.';
+                }
+            }
+        } else {
+            $errors[] = 'Неверный запрос.';
+        }
+        
+        if (!empty($errors)) {
+            $_SESSION['errors'] = $errors;
+            header('Location: index.php?controller=blog&action=editor&status=error');
+        } else {
+            $_SESSION['success'] = 'Запись успешно удалена.';
+            header('Location: index.php?controller=blog&action=editor&status=success');
+        }
+        exit;
+    }
 
     public function addComment() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
