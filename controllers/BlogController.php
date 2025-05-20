@@ -132,7 +132,7 @@ class BlogController {
     }
 
     public function showUploadForm() {
-        $this->view->render('blog/upload.php', 'Загрузка сообщений блога');
+        $this->view->render('admin/blog/upload.php', 'Загрузка сообщений блога');
     }
     
     public function edit() {
