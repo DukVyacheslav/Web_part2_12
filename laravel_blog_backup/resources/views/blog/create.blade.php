@@ -37,11 +37,11 @@
         @csrf
         <div class="form-group">
             <label for="title">Заголовок</label>
-            <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required maxlength="255">
+<input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required maxlength="255" />
         </div>
         <div class="form-group">
             <label for="content">Содержание</label>
-            <textarea name="content" id="content" class="form-control" rows="5" required>{{ old('content') }}</textarea>
+<textarea name="content" id="content" class="form-control" rows="5" required>{{ old('content') }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Сохранить</button>
         <a href="{{ route('blog.index') }}" class="btn btn-secondary">Отмена</a>
