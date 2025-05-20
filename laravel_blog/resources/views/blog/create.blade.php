@@ -16,11 +16,11 @@
         @csrf
         <div class="form-group">
             <label for="name">Тема:</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required maxlength="255">
         </div>
         <div class="form-group">
             <label for="text">Текст:</label>
-            <textarea class="form-control" id="text" name="text" rows="5" required>{{ old('text') }}</textarea>
+            <textarea class="form-control" id="text" name="text" rows="5" required maxlength="2000">{{ old('text') }}</textarea>
         </div>
         <div class="form-group">
             <label for="img">Изображение:</label>
