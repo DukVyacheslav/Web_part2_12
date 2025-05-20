@@ -52,6 +52,11 @@
             <img src="public/images/blog/<?= htmlspecialchars($post->img) ?>" class="img-thumbnail mb-2" style="max-width: 200px" alt="<?= htmlspecialchars($post->name) ?>">
             <?php endif; ?>
             <p class="card-text"><?= nl2br(htmlspecialchars($post->text)) ?></p>
+            <form action="index.php?controller=blog&action=delete" method="post" onsubmit="return confirm('Вы уверены, что хотите удалить эту запись?');">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($post->id) ?>">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+            </form>
         </div>
     </div>
     <?php endforeach; ?>
