@@ -1,0 +1,794 @@
+/* Сброс базовых стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Основные стили для body */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1A1A1A, #2D2D2D);
+    color: #FFFFFF;
+    min-height: 100vh;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 60px; /* Отступ для фиксированного хедера */
+}
+
+/* Центрирование основного контейнера */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    min-height: calc(100vh - 60px); /* Высота минус хедер */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Центрирование контейнеров в гостевой книге */
+.row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Центрирование контента гостевой книги */
+.guestbook-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#guestbookMessages {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Стили для шапки */
+header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 50px !important;
+    padding: 0 !important;
+}
+
+.navbar .container {
+    height: 100%;
+}
+
+.navbar-collapse {
+    height: 100%;
+}
+
+.navbar .navbar-nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+
+.navbar .nav-item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.navbar .nav-link {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 15px !important;
+}
+
+header img {
+    width: 50px;
+    height: auto;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #FF6F61;
+}
+
+/* Основной контент */
+main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Стили для карточек */
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 1rem auto;
+    width: 100%;
+    max-width: 800px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-body {
+    color: #FFFFFF;
+    padding: 2rem;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+    border-radius: 10px 10px 0 0;
+    display: block;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Контейнер для фото */
+.photo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+/* Стили для фото на главной странице */
+.profile-photo {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Сетка для фотоальбома */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    padding: 0 1rem;
+}
+
+.photo-grid .card {
+    margin: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.photo-grid .card-img-top {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.photo-grid .card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.photo-grid .card-body {
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Модальное окно для просмотра фотографий */
+.modal-body img {
+    max-width: 100%;
+    max-height: 80vh;
+    margin: 0 auto;
+    display: block;
+    object-fit: contain;
+}
+
+.photo-item-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 100%; /* Соотношение сторон 1:1 */
+}
+
+.photo-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.photo-item:hover {
+    transform: scale(1.05);
+}
+
+.photo-caption {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    color: #FFFFFF;
+    opacity: 0.8;
+}
+
+/* Стили для списка интересов */
+.interest-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.category {
+    margin-bottom: 1.5rem;
+}
+
+.category h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #FF6F61;
+}
+
+.subcategory-list {
+    list-style-type: disc;
+    padding-left: 2rem;
+}
+
+.subcategory {
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.description {
+    font-style: italic;
+    color: #D3D3D3;
+    margin-left: 0.5rem;
+}
+
+/* Модальное окно (lightbox) */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content {
+    position: relative;
+    text-align: center;
+}
+
+#lightbox-image {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    display: block;
+    margin: 0 auto;
+}
+
+#lightbox-caption {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #FFFFFF;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 1002;
+}
+
+.close:hover {
+    color: #FF6F61;
+}
+
+/* Форма (для contact.php) */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+input, textarea {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 0.75rem;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #FF6F61;
+}
+
+input::placeholder, textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+input[type="submit"] {
+    background: linear-gradient(90deg, #FF6F61, #DE4D4D);
+    border: none;
+    border-radius: 25px;
+    padding: 0.75rem 1.5rem;
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #DE4D4D, #FF6F61);
+}
+
+input[type="submit"]:active {
+    transform: scale(0.95);
+}
+
+/* Сообщения об успехе/ошибке */
+.success-message {
+    background: rgba(0, 255, 0, 0.2);
+    color: #00FF00;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.error-message {
+    background: rgba(255, 0, 0, 0.2);
+    color: #FF0000;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Специфичные стили для таблицы гостевой книги */
+#guestbookMessages .table,
+#guestbookMessages .table thead th,
+#guestbookMessages .table tbody td,
+#guestbookMessages .table * {
+    color: #FFFFFF !important;
+    background: transparent !important;
+}
+
+#guestbookMessages .table {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#guestbookMessages .table thead {
+    background: rgba(0, 102, 255, 0.35) !important;
+}
+
+#guestbookMessages .table thead th {
+    border-bottom: 2px solid #4285f4 !important;
+    padding: 15px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+#guestbookMessages .table tbody tr td {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-top: 1px solid rgba(66, 133, 244, 0.2) !important;
+    padding: 12px !important;
+    vertical-align: middle;
+    color: #FFFFFF !important;
+}
+
+#guestbookMessages .table tbody tr td {
+    color: #FFFFFF !important;
+    background-color: transparent !important;
+}
+
+#guestbookMessages .table tbody tr td a {
+    color: #FFFFFF !important;
+    text-decoration: none !important;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+#guestbookMessages .table tbody tr td a:hover {
+    border-bottom-color: #FFFFFF;
+}
+
+#guestbookMessages .table tbody tr:hover td {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transition: background 0.3s ease;
+}
+
+/* Центрируем гостевую книгу */
+#guestbookMessages {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+/* Футер */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Стили для навигации */
+.navbar-brand, .nav-link {
+    color: #FFFFFF !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #FF6F61 !important;
+}
+
+/* Стили для вкладок интересов */
+.nav-tabs {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-tabs .nav-link {
+    color: #FFFFFF;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: #FF6F61;
+}
+
+.nav-tabs .nav-link.active {
+    color: #FF6F61;
+    background: transparent;
+    border-bottom: 2px solid #FF6F61;
+}
+
+/* Стили для списка групп */
+.list-group-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+}
+
+/* Стили для форм */
+.form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #FF6F61;
+    color: #FFFFFF;
+    box-shadow: none;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Стили для кнопок */
+.btn-primary {
+    background: linear-gradient(90deg, #FF6F61, #DE4D4D);
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #DE4D4D, #FF6F61);
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+/* Стили для модальных окон */
+.modal-content {
+    background: rgba(45, 45, 45, 0.95);
+    backdrop-filter: blur(10px);
+    border: none;
+    color: #FFFFFF;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Стили для часов */
+#clock {
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+/* Стили для цитат */
+.blockquote {
+    border-left: 4px solid #FF6F61;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+    .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .card-img-top {
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-collapse {
+        background: rgba(45, 45, 45, 0.95);
+        padding: 0.5rem;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+        height: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        border-radius: 0 0 8px 8px;
+    }
+    
+    .navbar .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .navbar .nav-item {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .navbar .nav-link {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .card {
+        margin: 1rem 0;
+    }
+    
+    #clock {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .card {
+        padding: 1.5rem;
+        max-width: 90%;
+    }
+
+    .photo-grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
+
+    .photo-item {
+        height: 250px;
+    }
+
+    .card-img-top {
+        height: 200px;
+    }
+
+    .interest-list, .subcategory-list {
+        padding-left: 1rem;
+    }
+
+    input[type="submit"] {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .profile-photo {
+        max-width: 100%;
+    }
+
+    #lightbox-image {
+        max-width: 100%;
+    }
+}
+
+/* Анимации */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Переопределение стилей Bootstrap */
+.table {
+    color: #FFFFFF !important;
+}
+
+.table td,
+.table th,
+.table tr,
+.table * {
+    color: #FFFFFF !important;
+}
+
+/* Центрирование контента в интересах */
+.interest-categories {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Исправление отступов для контента */
+.col-md-4, .col-md-8, .col-md-12 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Стили для хедера внутри навигации */
+.navbar .container {
+    min-height: auto;
+    padding: 0 1rem;
+}
